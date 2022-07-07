@@ -44,6 +44,30 @@ if [[ -f .env ]]; then
   set +o allexport
 fi
 
+while [[ $# -gt 0 ]]
+do
+    key="$1"
+    case $key in
+        -x|--debug)
+        set -x
+        shift
+        ;;
+        --ide)
+        ENABLE_IDE=2
+        shift
+        ;;
+        --public-host)
+        PUBLIC_HOST="-u$2"
+        shift # past argument
+        shift # past value
+        ;;
+        *)    # unknown option
+        POSITIONAL+=("$1") # save it in an array for later
+        shift # past argument
+        ;;
+    esac
+done
+
 export COMPOSE_PROJECT_PHP_VERSION=${COMPOSE_PROJECT_PHP_VERSION-7.4}
 export COMPOSE_PROJECT_ELASTICSEARCH_VERSION=${COMPOSE_PROJECT_PHP_VERSION-7.10.2}
 export COMPOSE_PROJECT_NAME=${COMPOSE_PROJECT_NAME-$(basename "$COMPOSE_PROJECT_APPDIR")}
@@ -56,6 +80,8 @@ export COMPOSE_PROJECT_PORT_MAIL_WEBGUI=${COMPOSE_PROJECT_PORT_MAIL_WEBGUI-"${CO
 export COMPOSE_PROJECT_COMPOSER_AUTH=${COMPOSE_PROJECT_COMPOSER_AUTH-${COMPOSER_AUTH-""}}
 export COMPOSE_PROJECT_CONFIG_DIR="$HOME/.$(basename $0)/${COMPOSE_PROJECT_NAME}"
 
+export ACME_PROVIDER=${ACME_PROVIDER:-cloudflare}
+
 if [[ ! -d "${COMPOSE_PROJECT_CONFIG_DIR}" ]];then
     mkdir -p "${COMPOSE_PROJECT_CONFIG_DIR}"
 fi
@@ -66,6 +92,10 @@ DOCKER_COMPOSE_VERSION=$($(which docker-compose) --version | grep '[0-9]\+\.[0-9
 DOCKER_COMPOSE_BIN="${DOCKER_COMPOSE_BIN-$(which docker-compose)}";
 if [[ -f "${COMPOSE_PROJECT_CONFIG_DIR}/docker-compose.yml" ]]; then
   DOCKER_COMPOSE_BIN="${DOCKER_COMPOSE_BIN} -f ${COMPOSE_PROJECT_CONFIG_DIR}/docker-compose.yml"
+fi
+
+if [[ "" != ${PROXY_HOST} ]]; then
+  DOCKER_COMPOSE_BIN="${DOCKER_COMPOSE_BIN} -f ${COMPOSE_PROJECT_CONFIG_DIR}/docker-compose-proxy.yml"
 fi
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -214,5 +244,5 @@ patch -R -p0 -d ${COMPOSE_PROJECT_APPDIR} < "${COMPOSE_PROJECT_CONFIG_DIR}/xhpro
 COMMANDS
 fi
 
-exec ${DOCKER_COMPOSE_BIN} "$@"
+exec ${DOCKER_COMPOSE_BIN} "$POSITIONAL"
 

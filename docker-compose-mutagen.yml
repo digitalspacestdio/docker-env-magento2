@@ -3,6 +3,7 @@ version: '3.4'
 services:
   mutagen:
     image: "digitalspacestudio/php:${COMPOSE_PROJECT_PHP_VERSION-7.4}"
+    container_name: ${COMPOSE_PROJECT_NAME}_mutagen
     user: root
     volumes:
       - 'appcode:/var/www'
