@@ -363,7 +363,7 @@ services:
       fpm:
         condition: service_healthy
     ports:
-      - '${COMPOSE_PROJECT_NGINX_BIND_HOST:-127.0.0.1}:${COMPOSE_PROJECT_PORT_PREFIX}80:80'
+      - '${COMPOSE_PROJECT_BIND_HOST_HTTP:-127.0.0.1}:${COMPOSE_PROJECT_PORT_HTTP}:80'
     volumes:
       - 'appcode:/var/www:ro'
       - '${COMPOSE_PROJECT_CONFIG_DIR:-.}/docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro'
