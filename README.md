@@ -11,8 +11,11 @@
 Install Docker for Mac: https://docs.docker.com/desktop/mac/install/  
 
 **Linux**  
-Install Docker Engine: https://docs.docker.com/engine/install/ubuntu/  
-Install Docker Compose https://docs.docker.com/compose/install/  
+Install Docker with Compose plugin: 
+```
+curl https://get.docker.com | sudo bash
+sudo usermod -aG docker $USER
+```
 
 **Windows**  
 Follow this guide: https://docs.docker.com/desktop/windows/wsl/  
@@ -151,6 +154,10 @@ docker-compose-magento bin/magento config:set  web/secure/use_in_frontend 1
 11. Start the stack in the background mode
 ```bash
 docker-compose-magento up -d
+```
+or if you want to bind custom port
+```bash
+COMPOSE_PROJECT_PORT_HTTP=80 docker-compose-magento up -d
 ```
 
 > Application will be available by following link: http://localhost:30280/
