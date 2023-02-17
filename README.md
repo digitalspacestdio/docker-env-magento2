@@ -15,6 +15,7 @@ Install Docker with Compose plugin:
 ```
 curl https://get.docker.com | sudo bash
 sudo usermod -aG docker $USER
+exec su -l $USER
 ```
 
 **Windows**  
