@@ -104,7 +104,7 @@ if [[ -f "$COMPOSE_PROJECT_APPDIR/.nvmrc" ]] && [[ -z $COMPOSE_PROJECT_NODE_VERS
   echo "==> Found .nvmrc with following version: $COMPOSE_PROJECT_NODE_VERSION"
 fi
 
-if [[ "$OSTYPE" == "darwin"* ]]; then
+if [[ "$OSTYPE" == "darwin"* ]] && [[ $1 != 'install' ]]; then
   MACOS_VERSION=$(which sw_vers > /dev/null && sw_vers | grep ProductVersion | grep -o '[0-9]\+\.[0-9]\+' || true)
   #if [[ $(echo $MACOS_VERSION | awk -F. '{print $1}') -gt 12 ]] || [[ $(echo $MACOS_VERSION | awk -F. '{print $1}') -gt 11 ]] && [[ $(echo $MACOS_VERSION | awk -F. '{print $2}') -gt 2 ]]; then
   #  export COMPOSE_PROJECT_MODE=${COMPOSE_PROJECT_MODE:-default}
@@ -286,5 +286,11 @@ patch -R -p0 -d ${COMPOSE_PROJECT_APPDIR} < "${COMPOSE_PROJECT_CONFIG_DIR}/xhpro
 COMMANDS
 fi
 
-exec ${DOCKER_COMPOSE_BIN} "$@"
+if [[ $1 == 'install' ]]; then
+  rsync -av "${COMPOSE_PROJECT_CONFIG_DIR}/.docker/" "${COMPOSE_PROJECT_APPDIR}/.docker"
+  export COMPOSE_PROJECT_CONFIG_DIR="${COMPOSE_PROJECT_APPDIR}"
+  ${DOCKER_COMPOSE_BIN} config | sed "s~$COMPOSE_PROJECT_APPDIR~.~g" > "${COMPOSE_PROJECT_APPDIR}/docker-compose.override.yml"
+  exit
+fi
 
+exec ${DOCKER_COMPOSE_BIN} "$@"
