@@ -22,7 +22,7 @@ exec su -l $USER
 Follow this guide: https://docs.docker.com/desktop/windows/wsl/  
 
 ### Homebrew (MacOs/Linux/Windows)
-Install Homebrew by following guide https://docs.brew.sh/Installation
+Install Homebrew by following guide https://brew.sh
 
 ### Composer Credentials
 You need to export `COMPOSE_PROJECT_COMPOSER_AUTH` variable s othat Composer can use credentials inside containers
