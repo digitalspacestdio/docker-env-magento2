@@ -259,9 +259,9 @@ services:
     restart: always
     healthcheck:
       test: /bin/bash -c "</dev/tcp/localhost/9200"
-      start_period: 15s
+      start_period: 30s
       interval: 5s
-      retries: 5
+      retries: 30
     logging:
       driver: "json-file"
       options:
@@ -326,7 +326,7 @@ services:
       test: "mysqladmin ping --silent -u$${MYSQL_USER} -p$${MYSQL_PASSWORD}"
       start_period: 60s
       interval: 5s
-      retries: 5
+      retries: 30
     logging:
       driver: "json-file"
       options:
