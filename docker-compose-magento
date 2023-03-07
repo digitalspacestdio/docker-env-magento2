@@ -55,7 +55,7 @@ if [[ -z $COMPOSE_PROJECT_COMPOSER_AUTH ]] && [[ -z $COMPOSER_AUTH ]] && which c
     >&2 echo "==> Can't load composer auth.json"
   }
   if [[ -f "${COMPOSER_AUTH_JSON}" ]]; then
-    COMPOSE_PROJECT_COMPOSER_AUTH=$(cat "${COMPOSER_AUTH_JSON}")
+    COMPOSE_PROJECT_COMPOSER_AUTH=$(cat "${COMPOSER_AUTH_JSON}" | jq -c .)
   fi
 fi
 
