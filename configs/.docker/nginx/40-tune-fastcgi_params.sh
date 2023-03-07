@@ -10,4 +10,10 @@ if (\$http_x_forwarded_proto = "https") {
 }
 fastcgi_param HTTPS \$fcgi_https;
 
+\$fcgi_host \$host
+if (\$http_x_forwarded_host != "") {
+    set \$fcgi_host \$http_x_forwarded_host;
+}
+fastcgi_param HOST \$fcgi_host;
+
 FASTCGI_PARAM_HTTPS
