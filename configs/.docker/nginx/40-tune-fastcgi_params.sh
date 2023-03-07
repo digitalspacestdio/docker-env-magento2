@@ -14,6 +14,6 @@ set \$fcgi_host \$host;
 if (\$http_x_forwarded_host != "") {
     set \$fcgi_host \$http_x_forwarded_host;
 }
-fastcgi_param HOST \$fcgi_host;
+fastcgi_param HTTP_HOST \$fcgi_host;
 
 FASTCGI_PARAM_HTTPS
