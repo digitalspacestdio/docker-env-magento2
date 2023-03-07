@@ -267,9 +267,18 @@ COMMANDS
 fi
 
 if [[ $1 == 'install' ]]; then
+  if [[ -f "${COMPOSE_PROJECT_APPDIR}/docker-compose.yml" ]]; then
+    echo "The docker-compose.yml already exists, do you want to overwrite it?"
+    select yn in "Yes" "No"; do
+        case $yn in
+            Yes ) break;;
+            No ) exit;;
+        esac
+    done
+  fi
   rsync --delete -av "${COMPOSE_PROJECT_CONFIG_DIR}/.docker/" "${COMPOSE_PROJECT_APPDIR}/.docker/"
   export COMPOSE_PROJECT_CONFIG_DIR="${COMPOSE_PROJECT_APPDIR}"
-  ${DOCKER_COMPOSE_BIN} config | sed "s~$COMPOSE_PROJECT_APPDIR~.~g" > "${COMPOSE_PROJECT_APPDIR}/docker-compose.override.yml"
+  ${DOCKER_COMPOSE_BIN} config | sed "s~$COMPOSE_PROJECT_APPDIR~.~g" > "${COMPOSE_PROJECT_APPDIR}/docker-compose.yml"
   exit
 fi
 
