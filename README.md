@@ -119,7 +119,8 @@ docker-compose-magento composer install -o --no-interaction
 
 4. Configure the application database credentials
 ```bash
-docker-compose-magento database-config
+docker-compose-magento bash -c 'bin/magento setup:config:set --quiet --db-host $DATABASE_HOST --db-user $DATABASE_USER --db-password $DATABASE_PASSWORD --db-name $DATABASE_NAME'
+docker-compose-magento bin/magento app:config:import --quiet
 ```
 
 5. Configure the application redis settings
