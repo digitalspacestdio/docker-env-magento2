@@ -113,6 +113,7 @@ services:
 
   cron:
     container_name: ${COMPOSE_PROJECT_NAME:-unnamed}_cron_${COMPOSE_PROJECT_PHP_VERSION:-8.1}_${COMPOSE_PROJECT_NODE_VERSION:-16.16.0}
+    profiles: ["cron"]
     build:
       context: "${COMPOSE_PROJECT_CONFIG_DIR:-.}/.docker/php-node-magento"
       args:
