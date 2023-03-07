@@ -30,7 +30,7 @@ services:
     environment:
       - 'XHGUI_MONGO_HOSTNAME=mongodb'
       - 'XHGUI_MONGO_DATABASE=xhprof'
-      - 'COMPOSER_AUTH=${COMPOSE_PROJECT_COMPOSER_AUTH:-{}}'
+      - 'COMPOSER_AUTH=${COMPOSE_PROJECT_COMPOSER_AUTH:-null}'
       - 'NODE_OPTIONS="--max-old-space-size=1024"'
       - 'MAGE_MODE=${MAGE_MODE:-default}'
       - 'XDEBUG_MODE=${XDEBUG_MODE_FPM:-off}'
@@ -81,7 +81,7 @@ services:
     environment:
       - 'XHGUI_MONGO_HOSTNAME=mongodb'
       - 'XHGUI_MONGO_DATABASE=xhprof'
-      - 'COMPOSER_AUTH=${COMPOSE_PROJECT_COMPOSER_AUTH:-{}}'
+      - 'COMPOSER_AUTH=${COMPOSE_PROJECT_COMPOSER_AUTH:-null}'
       - 'NODE_OPTIONS="--max-old-space-size=1024"'
       - 'MAGE_MODE=${MAGE_MODE:-default}'
       - 'XDEBUG_MODE=${XDEBUG_MODE_CLI:-off}'
@@ -138,7 +138,7 @@ services:
     environment:
       - 'XHGUI_MONGO_HOSTNAME=mongodb'
       - 'XHGUI_MONGO_DATABASE=xhprof'
-      - 'COMPOSER_AUTH=${COMPOSE_PROJECT_COMPOSER_AUTH:-{}}'
+      - 'COMPOSER_AUTH=${COMPOSE_PROJECT_COMPOSER_AUTH:-null}'
       - 'NODE_OPTIONS="--max-old-space-size=1024"'
       - 'MAGE_MODE=${MAGE_MODE:-default}'
       - 'XDEBUG_MODE=${XDEBUG_MODE_CRON:-off}'
