@@ -149,7 +149,8 @@ docker-compose-magento bin/magento cache:disable full_page
 10. Optionally: Disable Secure URLs
 ```bash
 docker-compose-magento bin/magento config:set  web/secure/use_in_adminhtml 0
-docker-compose-magento bin/magento config:set  web/secure/use_in_frontend 1
+docker-compose-magento bin/magento config:set  web/secure/use_in_frontend 0
+docker-compose-magento bin/magento cache:clean
 ```
 
 11. Start the stack in the background mode
