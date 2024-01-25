@@ -39,6 +39,11 @@ export COMPOSE_PROJECT_COMPOSER_AUTH='{
     }
 }'
 ```
+You can get the value from local machine where composer already configure using following command:
+```bash
+echo "export COMPOSE_PROJECT_COMPOSER_AUTH='"$(cat $(php -d display_errors=0 $(which composer) config --no-interaction --global home 2>/dev/null)/auth.json)"'"
+```
+
 > Optionally you can add this row to your `~/.bashrc` or `~/.zshrc`
 
 
