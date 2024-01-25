@@ -82,7 +82,7 @@ docker-compose-magento bin/magento setup:install --backend-frontname="admin" --k
 
 6. Optionally: Disable 2FA module (if needed)
 ```bash
-docker-compose-magento bin/magento module:disable Magento_TwoFactorAuth
+docker-compose-magento bin/magento module:disable Magento_TwoFactorAuth Magento_AdminAdobeImsTwoFactorAuth
 ```
 
 7. Optionally: Disable FPC
