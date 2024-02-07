@@ -25,9 +25,9 @@ Follow this guide: https://docs.docker.com/desktop/windows/wsl/
 Install Homebrew by following guide https://brew.sh
 
 ### Composer Credentials
-You need to export `COMPOSE_PROJECT_COMPOSER_AUTH` variable s othat Composer can use credentials inside containers
+You need to export `COMPOSER_AUTH` variable s othat Composer can use credentials inside containers
 ```bash
-export COMPOSE_PROJECT_COMPOSER_AUTH='{
+export COMPOSER_AUTH='{
     "http-basic": {
         "repo.magento.com": {
             "username": "xxxxxxxxxxxx",
@@ -41,7 +41,7 @@ export COMPOSE_PROJECT_COMPOSER_AUTH='{
 ```
 You can get the value from local machine where composer already configure using following command:
 ```bash
-echo "export COMPOSE_PROJECT_COMPOSER_AUTH='"$(cat $(php -d display_errors=0 $(which composer) config --no-interaction --global home 2>/dev/null)/auth.json)"'"
+echo "export COMPOSER_AUTH='"$(cat $(php -d display_errors=0 $(which composer) config --no-interaction --global home 2>/dev/null)/auth.json)"'"
 ```
 
 > Optionally you can add this row to your `~/.bashrc` or `~/.zshrc`
