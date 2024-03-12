@@ -130,8 +130,8 @@ docker-compose-magento bin/magento app:config:import --quiet
 
 5. Configure the application redis settings
 ```bash
-bin/magento setup:config:set --quiet --cache-backend redis --cache-backend-redis-server redis --cache-backend-redis-port 6379 --cache-backend-redis-db 0
-bin/magento setup:config:set --quiet --session-save redis --session-save-redis-host redissession --session-save-redis-port 6379 --session-save-redis-db 0
+docker-compose-magento bin/magento setup:config:set --quiet --cache-backend redis --cache-backend-redis-server redis --cache-backend-redis-port 6379 --cache-backend-redis-db 0
+docker-compose-magento bin/magento setup:config:set --quiet --session-save redis --session-save-redis-host redissession --session-save-redis-port 6379 --session-save-redis-db 0
 docker-compose-magento bin/magento app:config:import --quiet
 ```
 
